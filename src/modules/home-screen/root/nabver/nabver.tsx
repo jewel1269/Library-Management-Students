@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between py-4">
           {/* Left Section */}
           <div className="flex items-center gap-4">
-            <h1 className="lg:text-xl text-md font-bold text-white">Library System</h1>
+            <h1 className="lg:text-xl text-md font-bold text-white">Digital Library</h1>
             <input
               type="search"
               placeholder="Search"
@@ -44,8 +44,8 @@ const Navbar = () => {
             {(AuthStudents()
               ? [
                   { name: "Home", path: "/" },
-                  { name: "Borrow Book", path: "/borrow" },
-                  { name: "Return Book", path: "/return" },
+                  { name: "Borrow Book", path: "/private/borrow" },
+                  { name: "News", path: "/common/news" },
                   { name: "Login/Register", path: "/common/login" },
                 ]
               : [
