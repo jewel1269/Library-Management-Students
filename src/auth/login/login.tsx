@@ -47,7 +47,7 @@ const Login = () => {
   return (
     <div className="flex flex-col md:flex-row h-screen bg-[#0D2B2F] text-white">
       {/* Left Section */}
-      <div className="hidden md:flex md:w-1/2 items-center justify-center">
+      <div className=" md:flex md:w-1/2 items-center justify-center">
         <div className="text-center">
           <Image
             height={200}
@@ -109,7 +109,7 @@ const Login = () => {
          <p className="text-center text-sm  text-gray-400 hover:underline cursor-pointer">
             Forgotten Your Password?
           </p>
-         <Link href={"/register"}>
+         <Link href={"/common/register"}>
          <h1 className="text-center text-sm  text-gray-400 hover:underline cursor-pointer">Register</h1>
          </Link>
          </div>
