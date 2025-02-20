@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const NewsComponent = () => {
   const newsData = [
     {
@@ -25,17 +27,22 @@ const NewsComponent = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <div className="bg-white p-4 rounded-lg shadow-md">
+      <div className="bg-white p-4 rounded-lg lg:mt-20 shadow-md">
         <h2 className="text-lg font-bold mb-3">Latest News</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {newsData.map((news) => (
             <div
               key={news.id}
-              className="bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-500"
-            >
+              className="bg-white lg:flex items-center justify-around p-4 rounded-lg shadow-md border-l-4 border-blue-500"
+            > 
+            <div>
+              <Image width={50} height={50} src={""} alt="News Image"/>
+            </div>
+              <div className="">
               <h3 className="text-md font-semibold">{news.title}</h3>
               <p className="text-sm text-gray-600">{news.description}</p>
               <p className="text-xs text-gray-500 mt-2">Date: {news.date}</p>
+              </div>
             </div>
           ))}
         </div>

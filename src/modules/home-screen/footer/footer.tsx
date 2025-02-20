@@ -9,15 +9,7 @@ const Footer = () => {
           <div className="lg:flex">
             <div className="w-full -mx-6 lg:w-2/5">
               <div className="px-6">
-                <a href="#">
-                  <Image
-                    height={28}
-                    width={32}
-                    className="w-auto h-7"
-                    src="https://merakiui.com/images/full-logo.svg"
-                    alt=""
-                  />
-                </a>
+               <h1 className="text-2xl font-bold text-yellow-500">Digital Library</h1>
 
                 <p className="max-w-sm mt-2 text-white dark:text-gray-400">
                   Join 31,000+ other and never miss out on new tips, tutorials,
@@ -165,7 +157,7 @@ const Footer = () => {
           <hr className="h-px my-6 bg-gray-200 border-none dark:bg-gray-700" />
 
           <div>
-            <p className="text-center text-black dark:text-gray-400">
+            <p className="text-center text-yellow-500 dark:text-gray-400">
               © Digital Library 2025 - All rights reserved
             </p>
           </div>

@@ -27,15 +27,16 @@ const Register = () => {
       toast.error("Passwords do not match");
       return;
     }
+    console.log(data);
 
     try {
-      const response = await axios.post(`${BASE_URI}/api/admin/register`, data);
+      const response = await axios.post(`${BASE_URI}/api/user/register`, data);
       console.log(response.data);
 
       if (response.data.success) {
         toast.success("Registration Successful");
         setTimeout(() => {
-          router.push("/");
+          router.push("/common/login");
         }, 2000);
       } else {
         toast.error("Admin with this email already exists");

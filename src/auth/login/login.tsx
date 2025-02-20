@@ -24,7 +24,7 @@ const Login = () => {
 
   const onSubmit = async (data: FormData) => {
     try {
-      const response = await axios.post(`${BASE_URI}/api/admin/login`, data);
+      const response = await axios.post(`${BASE_URI}/api/user/login`, data);
       console.log(response.data);
 
       if (!response.data.success) {
@@ -36,7 +36,7 @@ const Login = () => {
       toast.success("Admin Logged In Successfully");
 
       setTimeout(() => {
-        router.push("/dashboard/home");
+        router.push("/private/borrow");
       }, 2000);
     } catch (error) {
       toast.error("Invalid Admin");

@@ -1,38 +1,38 @@
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+
 import Image from "next/image";
 
 const books = [
   {
     id: 1,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Change by Design",
     author: "Allie Wells",
     rating: "4.5/5",
   },
   {
     id: 2,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Let me Penal you in",
     author: "Cora Mack",
     rating: "4.5/5",
   },
   {
     id: 3,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Ethereum",
     author: "Chase Thornton",
     rating: "4.5/5",
   },
   {
     id: 4,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Applied AI",
     author: "Francis Salazar",
     rating: "4.5/5",
   },
   {
     id: 5,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Unlimited Memory",
     author: "Delta Fowler",
     rating: "4.5/5",
@@ -42,7 +42,7 @@ const books = [
 const userBooks = [
   {
     id: 1,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Super-Modified",
     author: "Ash Maurya",
     rating: "4.5/5",
@@ -54,7 +54,7 @@ const userBooks = [
   },
   {
     id: 2,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Scaling Lean",
     author: "Ash Maurya",
     rating: "4.5/5",
@@ -66,7 +66,7 @@ const userBooks = [
   },
   {
     id: 3,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "The Zero Marginal Cost Society",
     author: "Michael C. Feathers",
     rating: "3.5/5",
@@ -78,7 +78,7 @@ const userBooks = [
   },
   {
     id: 4,
-    image: "",
+    image: "https://ds.rokomari.store/rokomari110/ProductNew20190903/260X372/931cf82cf_97803.jpg",
     title: "Working Effectively",
     author: "Michael C. Feathers",
     rating: "4.5/5",
