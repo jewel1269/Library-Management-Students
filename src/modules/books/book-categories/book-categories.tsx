@@ -1,4 +1,7 @@
 "use client";
+import BASE_URI from "@/constant";
+import { useGetBooksQuery } from "@/modules/redux/features/api/api-slice";
+import axios from "axios";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import {
@@ -45,54 +48,40 @@ const categories = [
   },
 ];
 
-
 const BookCategories: React.FC = () => {
-  const [books, setBooks] = useState<{ category: string; title: string }[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const {jewel} = useGetBooksQuery()
+  console.log(jewel, "jewel");
 
-  // Simulate API call
+  const [books, setBooks] = useState([]);
+
   useEffect(() => {
-    setTimeout(() => {
-      setBooks([
-        { category: "Ebooks", title: "The Great Gatsby" },
-        { category: "Ebooks", title: "1984 by George Orwell" },
-        { category: "Audiobooks", title: "Atomic Habits" },
-        { category: "Magazines", title: "Forbes Magazine" },
-        { category: "Teens & Kids", title: "Harry Potter" },
-        { category: "Ebooks", title: "The Great Gatsby" },
-        { category: "Ebooks", title: "1984 by George Orwell" },
-        { category: "Audiobooks", title: "Atomic Habits" },
-        { category: "Magazines", title: "Forbes Magazine" },
-        { category: "Teens & Kids", title: "Harry Potter" },
-        { category: "Ebooks", title: "The Great Gatsby" },
-        { category: "Ebooks", title: "1984 by George Orwell" },
-        { category: "Audiobooks", title: "Atomic Habits" },
-        { category: "Magazines", title: "Forbes Magazine" },
-        { category: "Teens & Kids", title: "Harry Potter" },
-        { category: "Ebooks", title: "The Great Gatsby" },
-        { category: "Ebooks", title: "1984 by George Orwell" },
-        { category: "Audiobooks", title: "Atomic Habits" },
-        { category: "Magazines", title: "Forbes Magazine" },
-        { category: "Teens & Kids", title: "Harry Potter" },
-        { category: "Ebooks", title: "The Great Gatsby" },
-        { category: "Ebooks", title: "1984 by George Orwell" },
-        { category: "Audiobooks", title: "Atomic Habits" },
-        { category: "Magazines", title: "Forbes Magazine" },
-        { category: "Teens & Kids", title: "Harry Potter" },
-        { category: "Ebooks", title: "The Great Gatsby" },
-        { category: "Ebooks", title: "1984 by George Orwell" },
-        { category: "Audiobooks", title: "Atomic Habits" },
-        { category: "Magazines", title: "Forbes Magazine" },
-        { category: "Teens & Kids", title: "Harry Potter" },
-      ]);
-    }, 1000);
+    const getAllBooks = async () => {
+      try {
+        if (typeof window !== "undefined") {
+          const token = localStorage.getItem("token");
+          if (token) {
+            const response = await axios.get(`${BASE_URI}/api/books/`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            setBooks(response.data?.data);
+            console.log(response);
+          } else {
+            console.log("No token found in localStorage.");
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      }
+    };
+
+    getAllBooks();
   }, []);
 
-  // Filtered books based on selected category
   const filteredBooks =
-    selectedCategory === "All"
-      ? books
-      : books.filter((book) => book.category === selectedCategory);
+    selectedCategory === "All" ? books : "No Data Available in this category";
 
   return (
     <div className="p-6 bg-gray-100">
@@ -113,71 +102,73 @@ const BookCategories: React.FC = () => {
                 : "bg-gray-200 text-gray-800 hover:bg-blue-500 hover:text-white"
             }`}
           >
+            {category.icon}
             {category.name}
           </button>
         ))}
-      </div> 
+      </div>
 
-      <hr className="mb-5 text-gray-200"/>
+      <hr className="mb-5 text-gray-200" />
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+    {filteredBooks.length > 0 ? (
+        filteredBooks.map((book, index) => (
+          <div
+            key={index}
+            className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md  mb-6"
+          >
+            <Image
+              className="object-cover w-full h-64"
+              width={720}
+              height={400}
+              src={book?.cover}
+              alt="Article"
+            />
 
-      {/* Books Display */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:px-20">
-        {filteredBooks.length > 0 ? (
-          filteredBooks.map((book, index) => (
-            <div key={index} className="rounded-md shadow-md  sm:w-96 dark:bg-gray-50 dark:text-gray-800">
-            <div className="flex items-center mt-3 justify-between p-3">
-              <div className="flex items-center space-x-2">
-                <Image
-                  height={50}
-                  width={50}
-                  src="https://source.unsplash.com/50x50/?portrait"
-                  alt=""
-                  className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-300"
-                />
-                <div className="-space-y-1">
-                  <h2 className="text-sm font-semibold leading-none">leroy_jenkins72</h2>
-                  <span className="inline-block text-xs leading-none dark:text-gray-600">
-                    Somewhere
+            <div className="p-6">
+              <div>
+                <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">
+                  book
+                </span>
+                <p className="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform  hover:text-gray-600 hover:underline">
+                 <span className="text-gray-500"> Title:  </span>{book?.title}
+                </p>
+                <p><span className="text-gray-500">Author:  </span> {book?.author}</p>
+                <p><span className="text-gray-500">Publisher:  </span> {book?.publisher}</p>
+
+                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                 <span className="text-sm text-gray-600">Description: </span>{book?.description.substring(0, 60)}......
+                </p>
+              </div>
+
+              <div className="mt-4">
+                <div className="flex items-center">
+                  <div className="flex items-center">
+                    <Image
+                      
+                      width={40}
+                      height={40}
+                      className="object-cover h-10 rounded-full"
+                      src={book?.cover}
+                      alt="Avatar"
+                    />
+                    <p className="mx-2 font-semibold text-gray-700 dark:text-gray-200">
+                      Jone Doe
+                    </p>
+                  </div>
+                  <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">
+                    21 SEP 2015
                   </span>
                 </div>
               </div>
-              <button title="Open options" type="button">
-                <FaEllipsisV className="w-5 h-5" />
-              </button>
-            </div>
-            <Image
-            height={300}
-            width={300}
-              src="https://source.unsplash.com/301x301/?random"
-              alt=""
-              className="object-cover object-center w-full h-72 dark:bg-gray-500"
-            />
-            <div className="p-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <button type="button" title="Like post" className="flex items-center justify-center">
-                    <FaHeart className="w-5 h-5" />
-                  </button>
-                  <button type="button" title="Add a comment" className="flex items-center justify-center">
-                    <FaComment className="w-5 h-5" />
-                  </button>
-                  <button type="button" title="Share post" className="flex items-center justify-center">
-                    <FaShare className="w-5 h-5" />
-                  </button>
-                </div>
-                <button type="button" title="Bookmark post" className="flex items-center justify-center">
-                  <FaBookmark className="w-5 h-5" />
-                </button>
-              </div>
             </div>
           </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-600 col-span-3">
-            No books found in this category.
-          </p>
-        )}
-      </div>
+        ))
+      ) : (
+        <p className="text-center text-gray-600">
+          No Data Available in this category
+        </p>
+      )}
+    </div>
     </div>
   );
 };
