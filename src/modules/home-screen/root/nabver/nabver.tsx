@@ -3,14 +3,13 @@ import { useState } from "react";
 import Image from "next/image";
 import { FiMenu, FiX, FiBell } from "react-icons/fi";
 import Link from "next/link";
-import useAuth from "@/auth/auth-students/useAuth";
 import toast from "react-hot-toast";
+import useAuth from "@/auth/auth-students/useAuth";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const { user } = useAuth();
-
+  const {user} = useAuth();
   const Logout = () => {
     localStorage.removeItem("token");
     toast.success("Logged Out Successfully");

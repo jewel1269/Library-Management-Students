@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import BASE_URI from "@/constant";
 
 const useAuth = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (typeof window === "undefined") {
+      setLoading(false);
+      return;
+    }
+
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -14,11 +20,10 @@ const useAuth = () => {
       }
 
       try {
-        const res = await axios.get(`http://localhost:5000/api/user/profile`, {
+        const response = await axios.get(`${BASE_URI}/api/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-
-        setUser(res.data.user);
+        setUser(response.data.user);
       } catch (error) {
         console.error("Error fetching user:", error);
         setUser(null);
@@ -29,8 +34,6 @@ const useAuth = () => {
 
     fetchUser();
   }, []);
-
-  console.log(user);
 
   return { user, loading };
 };

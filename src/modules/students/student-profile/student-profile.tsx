@@ -4,6 +4,7 @@ import React, { use } from "react";
 
 const StudentProfile = () => {
     const {user} = useAuth();
+    console.log(user, "efaef");
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center p-4">
       <div className="w-full max-w-5xl bg-white shadow-md rounded-lg p-6">
